@@ -16,6 +16,12 @@
              R23 and R24 build against net48, R25 and R26 against net8.0-windows. -->
         <Configurations>Debug.R23;Debug.R24;Debug.R25;Debug.R26</Configurations>
         <Configurations>$(Configurations);Release.R23;Release.R24;Release.R25;Release.R26</Configurations>
+
+        <!-- A Debug build copies itself into the per user add-ins folder of the matching Revit
+             version, so F5 lands on the code that was just compiled. Release builds never do:
+             the installer packages them, and the copy would fail anyway while Revit holds the
+             DLL open. -->
+        <DeployAddin Condition="$(Configuration.StartsWith('Debug'))">true</DeployAddin>
     </PropertyGroup>
 
     <ItemGroup>
