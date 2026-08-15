@@ -1,0 +1,14 @@
+<RevitAddIns>
+    <AddIn Type="Application">
+        <Name>BatchParameterUpdate</Name>
+        <Assembly>BatchParameterUpdate\BatchParameterUpdate.dll</Assembly>
+        <AddInId>EBC8133B-AE9B-4B57-B89C-AE359090F39E</AddInId>
+        <FullClassName>BatchParameterUpdate.Application</FullClassName>
+        <VendorId>Development</VendorId>
+        <VendorDescription></VendorDescription>
+    </AddIn>
+    <ManifestSettings>
+        <UseRevitContext>False</UseRevitContext>
+        <ContextName>BatchParameterUpdate</ContextName>
+    </ManifestSettings>
+</RevitAddIns>
