@@ -1,25 +1,20 @@
-﻿using Nice3point.Revit.Toolkit.External;
-using BatchParameterUpdate.Commands;
+using Autodesk.Revit.UI;
 
 namespace BatchParameterUpdate;
 
 /// <summary>
-///     Application entry point
+/// Entry point of the add-in. Revit instantiates this class at startup because the
+/// manifest registers it with Type="Application".
 /// </summary>
-[UsedImplicitly]
-public class Application : ExternalApplication
+public class Application : IExternalApplication
 {
-    public override void OnStartup()
+    public Result OnStartup(UIControlledApplication application)
     {
-        CreateRibbon();
+        return Result.Succeeded;
     }
 
-    private void CreateRibbon()
+    public Result OnShutdown(UIControlledApplication application)
     {
-        var panel = Application.CreatePanel("Commands", "BatchParameterUpdate");
-
-        panel.AddPushButton<StartupCommand>("Execute")
-            .SetImage("/BatchParameterUpdate;component/Resources/Icons/RibbonIcon16.png")
-            .SetLargeImage("/BatchParameterUpdate;component/Resources/Icons/RibbonIcon32.png");
+        return Result.Succeeded;
     }
 }

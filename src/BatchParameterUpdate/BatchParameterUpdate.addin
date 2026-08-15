@@ -1,14 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RevitAddIns>
     <AddIn Type="Application">
-        <Name>BatchParameterUpdate</Name>
+        <Name>Batch Parameter Update</Name>
         <Assembly>BatchParameterUpdate\BatchParameterUpdate.dll</Assembly>
         <AddInId>EBC8133B-AE9B-4B57-B89C-AE359090F39E</AddInId>
         <FullClassName>BatchParameterUpdate.Application</FullClassName>
-        <VendorId>Development</VendorId>
-        <VendorDescription></VendorDescription>
+        <VendorId>MLOP</VendorId>
+        <VendorDescription>Mateo Lopez</VendorDescription>
     </AddIn>
-    <ManifestSettings>
-        <UseRevitContext>False</UseRevitContext>
-        <ContextName>BatchParameterUpdate</ContextName>
-    </ManifestSettings>
 </RevitAddIns>

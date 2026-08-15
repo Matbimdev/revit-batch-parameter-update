@@ -2,35 +2,32 @@
 
     <PropertyGroup>
         <UseWPF>true</UseWPF>
-        <DeployAddin>true</DeployAddin>
-        <LaunchRevit>true</LaunchRevit>
-        <IsRepackable>false</IsRepackable>
+        <Version>1.0.0</Version>
+
+        <!-- Usings are written out in every file so a reader never has to guess where a type comes from. -->
+        <ImplicitUsings>false</ImplicitUsings>
+        <ImplicitRevitUsings>false</ImplicitRevitUsings>
+
+        <!-- Loads the add-in into its own context on Revit 2025 and later, so its assemblies
+             cannot collide with another add-in that ships a different version of the same file. -->
         <EnableDynamicLoading>true</EnableDynamicLoading>
-        <Configurations>Debug.R22;Debug.R23;Debug.R24;Debug.R25;Debug.R26</Configurations>
-        <Configurations>$(Configurations);Release.R22;Release.R23;Release.R24;Release.R25;Release.R26</Configurations>
+
+        <!-- The SDK reads the version suffix of the configuration and picks the target framework:
+             R23 and R24 build against net48, R25 and R26 against net8.0-windows. -->
+        <Configurations>Debug.R23;Debug.R24;Debug.R25;Debug.R26</Configurations>
+        <Configurations>$(Configurations);Release.R23;Release.R24;Release.R25;Release.R26</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
-        <!-- Revit Platform -->
-        <PackageReference Include="Nice3point.Revit.Toolkit" Version="$(RevitVersion).*"/>
-        <PackageReference Include="Nice3point.Revit.Extensions" Version="$(RevitVersion).*"/>
+        <!-- Revit API reference assemblies. They are reference only, nothing is copied to the
+             output, so the installer ships a single DLL with no third party dependencies. -->
         <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*"/>
         <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*"/>
-
-        <!-- MVVM -->
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
-
-        <!-- Development References -->
-        <PackageReference Include="JetBrains.Annotations" Version="2025.2.4" PrivateAssets="all"/>
     </ItemGroup>
-    
+
     <ItemGroup>
         <Resource Include="Resources\Icons\RibbonIcon16.png"/>
         <Resource Include="Resources\Icons\RibbonIcon32.png"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Models"/>
     </ItemGroup>
 
 </Project>
