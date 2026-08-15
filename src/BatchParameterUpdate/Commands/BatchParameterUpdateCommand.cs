@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using BatchParameterUpdate.Models;
+using BatchParameterUpdate.Services;
+using BatchParameterUpdate.Views;
 
 namespace BatchParameterUpdate.Commands;
 
@@ -36,7 +39,19 @@ public class BatchParameterUpdateCommand : IExternalCommand
             return Result.Cancelled;
         }
 
-        ShowMessage($"{selectedIds.Count} element(s) selected.");
+        var inputWindow = new ParameterInputWindow(selectedIds.Count);
+        if (inputWindow.ShowDialog() != true)
+        {
+            return Result.Cancelled;
+        }
+
+        string parameterName = inputWindow.ParameterName;
+        string newValue = inputWindow.NewValue;
+
+        var service = new ParameterUpdateService(uiDocument.Document);
+        BatchUpdateResult result = service.Run(selectedIds, parameterName, newValue);
+
+        new ResultsWindow(result, parameterName, newValue).ShowDialog();
         return Result.Succeeded;
     }
 
