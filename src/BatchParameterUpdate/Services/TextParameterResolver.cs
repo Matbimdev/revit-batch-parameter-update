@@ -25,6 +25,13 @@ public static class TextParameterResolver
     /// One name can resolve to several parameters, for example a built in one and a shared one
     /// added by a template. The writable text candidate wins, and when none qualifies the
     /// reported reason describes the closest match rather than whichever entry came first.
+    ///
+    /// Storage type is checked before write access on purpose. The two only overlap on a
+    /// parameter that is both numeric and locked, such as Volume, and there the storage type is
+    /// the more useful answer: calling it read only suggests that unlocking it would help, when
+    /// this command could never write text into it. Filtering by type first also keeps the
+    /// multiple candidate case honest, since a locked text parameter is then reported as locked
+    /// instead of being hidden behind a writable numeric namesake.
     /// </remarks>
     public static Parameter? Resolve(Element element, string parameterName, out SkipReason failureReason)
     {

@@ -53,6 +53,12 @@ public sealed class ParameterUpdateService
                         continue;
                     }
 
+                    if (!IsEditable(element))
+                    {
+                        skipped.Add(SkippedElement.For(element, SkipReason.NotEditable));
+                        continue;
+                    }
+
                     Parameter? parameter = TextParameterResolver.Resolve(
                         element, parameterName, out SkipReason failureReason);
 
@@ -83,6 +89,23 @@ public sealed class ParameterUpdateService
             bool modelChanged = transaction.Commit() == TransactionStatus.Committed;
             return new BatchUpdateResult(updatedCount, skipped, modelChanged);
         }
+    }
+
+    /// <summary>
+    /// Whether this user may write to the element right now.
+    /// </summary>
+    /// <remarks>
+    /// Only ownership is checked. NotOwned is editable, because Revit checks the element out
+    /// on the first change, and OwnedByCurrentUser is already ours. Asking before writing
+    /// turns what would otherwise be an exception per element into a clear line in the
+    /// summary naming the real problem, which is that somebody else has the element.
+    /// </remarks>
+    private bool IsEditable(Element element)
+    {
+        if (!_document.IsWorkshared) return true;
+
+        CheckoutStatus status = WorksharingUtils.GetCheckoutStatus(_document, element.Id);
+        return status != CheckoutStatus.OwnedByOtherUser;
     }
 
     private static void Write(

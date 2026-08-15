@@ -9,6 +9,9 @@ public enum SkipReason
     /// <summary>The id was in the selection but the document no longer resolves it.</summary>
     ElementNotFound,
 
+    /// <summary>Another user holds the element in a workshared model.</summary>
+    NotEditable,
+
     /// <summary>The element has no instance parameter under the name that was typed.</summary>
     ParameterNotFound,
 
@@ -37,6 +40,8 @@ public static class SkipReasonDescription
         {
             case SkipReason.ElementNotFound:
                 return "Element no longer exists in the document";
+            case SkipReason.NotEditable:
+                return "Element is owned by another user";
             case SkipReason.ParameterNotFound:
                 return "Parameter not found on the element";
             case SkipReason.NotTextParameter:
