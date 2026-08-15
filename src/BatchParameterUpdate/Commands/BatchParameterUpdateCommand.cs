@@ -23,7 +23,8 @@ public class BatchParameterUpdateCommand : IExternalCommand
 
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
-        UIDocument uiDocument = commandData.Application.ActiveUIDocument;
+        UIApplication uiApplication = commandData.Application;
+        UIDocument uiDocument = uiApplication.ActiveUIDocument;
         if (uiDocument?.Document is null)
         {
             ShowMessage("Open a project before running this command.");
@@ -39,7 +40,25 @@ public class BatchParameterUpdateCommand : IExternalCommand
             return Result.Cancelled;
         }
 
+        try
+        {
+            return Run(uiApplication, uiDocument.Document, selectedIds);
+        }
+        catch (System.Exception exception)
+        {
+            // The service rolls its transaction back before letting anything through, so the
+            // model is in the state it was in before the command started. Revit shows this
+            // text in its own error dialog.
+            message = $"The update could not be completed. {exception.Message}";
+            return Result.Failed;
+        }
+    }
+
+    private static Result Run(UIApplication uiApplication, Document document, ICollection<ElementId> selectedIds)
+    {
         var inputWindow = new ParameterInputWindow(selectedIds.Count);
+        inputWindow.SetRevitOwner(uiApplication);
+
         if (inputWindow.ShowDialog() != true)
         {
             return Result.Cancelled;
@@ -48,10 +67,13 @@ public class BatchParameterUpdateCommand : IExternalCommand
         string parameterName = inputWindow.ParameterName;
         string newValue = inputWindow.NewValue;
 
-        var service = new ParameterUpdateService(uiDocument.Document);
+        var service = new ParameterUpdateService(document);
         BatchUpdateResult result = service.Run(selectedIds, parameterName, newValue);
 
-        new ResultsWindow(result, parameterName, newValue).ShowDialog();
+        var resultsWindow = new ResultsWindow(result, parameterName, newValue);
+        resultsWindow.SetRevitOwner(uiApplication);
+        resultsWindow.ShowDialog();
+
         return Result.Succeeded;
     }
 
