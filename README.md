@@ -18,7 +18,9 @@ was skipped.
 | 2026 | .NET 8 | `Release.R26` |
 
 Each version gets its own assembly, compiled against that version's Revit API, and the
-installer deploys the matching one.
+installer deploys the matching one. The add-in was loaded and the command run in all four
+versions during development, which covers both runtimes: .NET Framework 4.8 for 2023 and 2024,
+.NET 8 for 2025 and 2026.
 
 Nothing older than 2023 is claimed. Revit 2022 and earlier were never built or opened during
 this work, so there is no basis to say they are supported.
