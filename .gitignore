@@ -1,0 +1,25 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+*.binlog
+
+# IDE
+.vs/
+*.user
+*.suo
+*.rsuser
+*.userosscache
+*.sln.docstates
+_ReSharper*/
+*.DotSettings.user
+
+# NuGet
+*.nupkg
+*.snupkg
+
+# Installer output, the compiled setup is published as a GitHub Release
+installer/Output/
+
+# OS
+Thumbs.db
+desktop.ini

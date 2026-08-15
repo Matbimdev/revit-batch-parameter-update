@@ -1,0 +1,11 @@
+# Normalize line endings on commit, check out native on each platform.
+* text=auto
+
+# Windows only tooling, keep CRLF in the working tree.
+*.ps1 text eol=crlf
+*.iss text eol=crlf
+*.sln text eol=crlf
+
+# Binary assets.
+*.png binary
+*.ico binary
