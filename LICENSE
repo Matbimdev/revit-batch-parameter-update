@@ -1,26 +1,13 @@
-PROPRIETARY SOFTWARE LICENSE
+ALL RIGHTS RESERVED
 
-Copyright (c) 2026 Mateo Lopez. All rights reserved.
+Copyright (c) 2026 the author. All rights reserved.
 
-This software, its source code and its documentation are the exclusive property
-of the copyright holder and are made available for evaluation only.
+This software and its source code are published for evaluation only. Installing
+it, running it and reading the code for that purpose is permitted. No other
+right is granted.
 
-PERMITTED
-  1. Install and run the software to evaluate it.
-  2. Read the source code to assess its design, quality and correctness.
+Any other use, including production or commercial work, redistribution,
+modification and reverse engineering, requires prior written permission.
 
-NOT PERMITTED WITHOUT PRIOR WRITTEN PERMISSION
-  1. Use in production, in client work or in any commercial activity.
-  2. Copying, publishing, distributing, sublicensing or selling the software or
-     its source code, in whole or in part.
-  3. Creating derivative works, including reuse of the source code in another
-     product.
-  4. Reverse engineering the compiled assemblies.
-  5. Removing or altering this notice.
-
-No trademark, patent or other right is granted beyond the permissions stated
-above. This license terminates automatically on any breach of its terms.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED. THE COPYRIGHT HOLDER SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGE, DATA
-LOSS OR OTHER LIABILITY ARISING FROM THE USE OF THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. THE COPYRIGHT
+HOLDER SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGE OR LOSS ARISING FROM ITS USE.

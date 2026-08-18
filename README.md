@@ -211,4 +211,4 @@ never has to guess.
 
 ## License
 
-Proprietary. Provided for evaluation only, all rights reserved. See [LICENSE](LICENSE).
+All rights reserved. Published for evaluation only. See [LICENSE](LICENSE).
